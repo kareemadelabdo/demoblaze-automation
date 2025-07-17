@@ -1,0 +1,37 @@
+package Tests;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.*;
+import Pages.LoginPage;
+import Utils.BrowserType;
+import Utils.JsonUtil;
+import Utils.WebDriverFactory;
+public class LoginTests {
+    private WebDriver driver;
+    private LoginPage loginPage;
+
+    @BeforeTest
+    public void setUp() {
+        driver = WebDriverFactory.createDriver(BrowserType.CHROME);
+        driver.get("https://www.demoblaze.com");
+        loginPage = new LoginPage(driver);
+    }
+
+    @Test
+    public void testValidLogin() {
+        String[] credentials = JsonUtil.getCredentials("src/main/resources/credentials.json");
+
+        loginPage.login(credentials[0], credentials[1]);
+
+        Assert.assertTrue(
+                loginPage.getLoggedInUsername().contains(credentials[0]),
+                "Login failed or username not displayed correctly.");
+    }
+
+    @AfterTest
+    public void quit() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+}
