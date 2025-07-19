@@ -1,56 +1,77 @@
 package Pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class CheckoutPage {
 
     private WebDriver driver;
 
-    private By placeOrderButton = By.xpath("//button[text()='Place Order']");
-    private By nameInput = By.id("name");
-    private By countryInput = By.id("country");
-    private By cityInput = By.id("city");
-    private By cardInput = By.id("card");
-    private By monthInput = By.id("month");
-    private By yearInput = By.id("year");
+    @FindBy(xpath = "//button[text()='Place Order']")
+    private WebElement placeOrderButton;
 
-    private By purchaseButton = By.xpath("//button[text()='Purchase']");
-    private By confirmationPopup = By.className("sweet-alert");
-    private By confirmationDetails = By.cssSelector(".sweet-alert > p");
-    private By okButton = By.xpath("//button[text()='OK']");
+    @FindBy(id = "name")
+    private WebElement nameInput;
+
+    @FindBy(id = "country")
+    private WebElement countryInput;
+
+    @FindBy(id = "city")
+    private WebElement cityInput;
+
+    @FindBy(id = "card")
+    private WebElement cardInput;
+
+    @FindBy(id = "month")
+    private WebElement monthInput;
+
+    @FindBy(id = "year")
+    private WebElement yearInput;
+
+    @FindBy(xpath = "//button[text()='Purchase']")
+    private WebElement purchaseButton;
+
+    @FindBy(className = "sweet-alert")
+    private WebElement confirmationPopup;
+
+    @FindBy(css = ".sweet-alert > p")
+    private WebElement confirmationDetails;
+
+    @FindBy(xpath = "//button[text()='OK']")
+    private WebElement okButton;
 
     public CheckoutPage(WebDriver driver) {
         this.driver = driver;
     }
 
     public void clickPlaceOrder() {
-        driver.findElement(placeOrderButton).click();
+        placeOrderButton.click();
     }
 
     public void fillOrderForm(String name, String country, String city, String card, String month, String year) throws InterruptedException {
         Thread.sleep(4000);
-        driver.findElement(nameInput).sendKeys(name);
-        driver.findElement(countryInput).sendKeys(country);
-        driver.findElement(cityInput).sendKeys(city);
-        driver.findElement(cardInput).sendKeys(card);
-        driver.findElement(monthInput).sendKeys(month);
-        driver.findElement(yearInput).sendKeys(year);
+        nameInput.sendKeys(name);
+        countryInput.sendKeys(country);
+        cityInput.sendKeys(city);
+        cardInput.sendKeys(card);
+        monthInput.sendKeys(month);
+        yearInput.sendKeys(year);
     }
 
     public void clickPurchase() {
-        driver.findElement(purchaseButton).click();
+        purchaseButton.click();
     }
 
     public String getConfirmationText() {
-        return driver.findElement(confirmationDetails).getText();
+        return confirmationDetails.getText();
     }
 
     public boolean isConfirmationDisplayed() {
-        return driver.findElement(confirmationPopup).isDisplayed();
+        return confirmationPopup.isDisplayed();
     }
 
     public void clickOk() {
-        driver.findElement(okButton).click();
+        okButton.click();
     }
 }

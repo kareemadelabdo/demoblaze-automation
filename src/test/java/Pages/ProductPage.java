@@ -1,14 +1,23 @@
 package Pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 public class ProductPage {
     private WebDriver driver;
 
-    private By productTitle = By.className("name");
-    private By productPrice = By.className("price-container");
-    private By productBody = By.xpath("//*[@id=\"more-information\"]/p");
-    private By addToCartButton = By.linkText("Add to cart");
+    @FindBy(className = "name")
+    private WebElement productTitle;
+
+    @FindBy(className = "price-container")
+    private WebElement productPrice;
+
+    @FindBy(xpath = "//*[@id='more-information']/p")
+    private WebElement productBody;
+
+    @FindBy(linkText = "Add to cart")
+    private WebElement addToCartButton;
 
     public ProductPage(WebDriver driver) {
         this.driver = driver;
@@ -16,20 +25,21 @@ public class ProductPage {
 
     public String getProductTitle() throws InterruptedException {
         Thread.sleep(1000);
-        return driver.findElement(productTitle).getText();
+        return productTitle.getText();
     }
 
     public String getProductPrice() throws InterruptedException {
         Thread.sleep(1000);
-        return driver.findElement(productPrice).getText();
+        return productPrice.getText();
     }
 
     public String getProductDescription() throws InterruptedException {
         Thread.sleep(2000);
-        return driver.findElement(productBody).getText();
+        return productBody.getText();
     }
+
     public void addToCart() throws InterruptedException {
         Thread.sleep(2000);
-        driver.findElement(addToCartButton).click();
+        addToCartButton.click();
     }
 }
