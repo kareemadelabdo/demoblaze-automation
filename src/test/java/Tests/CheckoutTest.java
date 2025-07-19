@@ -85,11 +85,7 @@ public class CheckoutTest extends AbstractTest{
         Assert.assertEquals(amountText, expectedAmount, "Amount does not match product price.");
         Assert.assertEquals(nameInPopup, name, "Name does not match input.");
 
-        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
-        File destFile = new File("screenshots/confirmation_" + timestamp + ".png");
-        destFile.getParentFile().mkdirs();
-        screenshot.renameTo(destFile);
+        takeScreenShot();
 
         checkoutPage.clickOk();
     }
