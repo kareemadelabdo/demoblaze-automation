@@ -1,11 +1,12 @@
 package Pages;
 
+import Utils.Helper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CheckoutPage {
+public class CheckoutPage extends Helper {
 
     private WebDriver driver;
 
@@ -43,37 +44,40 @@ public class CheckoutPage {
     private WebElement okButton;
 
     public CheckoutPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
     public void clickPlaceOrder() {
-        placeOrderButton.click();
+        click(placeOrderButton);
     }
 
     public void fillOrderForm(String name, String country, String city, String card, String month, String year) throws InterruptedException {
-        Thread.sleep(4000);
-        nameInput.sendKeys(name);
-        countryInput.sendKeys(country);
-        cityInput.sendKeys(city);
-        cardInput.sendKeys(card);
-        monthInput.sendKeys(month);
-        yearInput.sendKeys(year);
+
+        sendKeys(driver, nameInput, name);
+        sendKeys(driver, countryInput, country);
+        sendKeys(driver, cityInput, city);
+        sendKeys(driver, cardInput, card);
+        sendKeys(driver, monthInput, month);
+        sendKeys(driver, yearInput, year);
     }
 
     public void clickPurchase() {
-        purchaseButton.click();
+        click(purchaseButton);
     }
 
     public String getConfirmationText() {
+        waitForElement(driver, confirmationDetails);
         return confirmationDetails.getText();
     }
 
     public boolean isConfirmationDisplayed() {
+        waitForElement(driver, confirmationPopup);
         return confirmationPopup.isDisplayed();
     }
 
     public void clickOk() {
-        okButton.click();
+        click(okButton);
     }
 }

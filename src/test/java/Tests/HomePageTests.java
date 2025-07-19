@@ -17,12 +17,13 @@ public class HomePageTests extends AbstractTest {
     @BeforeTest
     public void setUp() {
         driver = createDriver(BrowserType.CHROME);
+        homePage.open();
         homePage = new HomePage(driver);
     }
 
     @Test
     public void HomePageVisualization() throws InterruptedException {
-        homePage.open();
+
         Assert.assertTrue(homePage.isHomePageLoaded(driver));
     }
 }

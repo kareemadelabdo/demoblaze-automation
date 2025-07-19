@@ -1,4 +1,5 @@
 package Tests;
+import Pages.HomePage;
 import Utils.AbstractTest;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -10,11 +11,12 @@ import Utils.WebDriverFactory;
 public class LoginTests extends AbstractTest {
     private WebDriver driver;
     private LoginPage loginPage;
+    private HomePage homePage;
 
     @BeforeTest
     public void setUp() {
         driver = WebDriverFactory.createDriver(BrowserType.CHROME);
-        driver.get("https://www.demoblaze.com");
+        homePage.open();
         loginPage = new LoginPage(driver);
     }
 

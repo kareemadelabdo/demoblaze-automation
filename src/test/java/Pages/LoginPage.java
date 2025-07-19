@@ -1,15 +1,15 @@
 package Pages;
 
+import Utils.Helper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class LoginPage {
+public class LoginPage extends Helper {
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -29,21 +29,23 @@ public class LoginPage {
     private WebElement loggedInUser;
 
     public LoginPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
 
     public void login(String username, String password) {
-        loginLink.click();
-        usernameInput.sendKeys(username);
-        passwordInput.sendKeys(password);
-        loginButton.click();
+        click(loginButton);
+        sendKeys(driver, usernameInput, username);
+        sendKeys(driver, passwordInput, password);
+        click(loginButton);
 
-        wait.until(ExpectedConditions.visibilityOf(loggedInUser));
+        waitForElement(driver, loggedInUser);
     }
 
     public String getLoggedInUsername() {
+        waitForElement(driver, loggedInUser);
         return loggedInUser.getText();
     }
 }
