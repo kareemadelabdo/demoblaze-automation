@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class CheckoutTest {
+public class CheckoutTest extends AbstractTest{
 
     private WebDriver driver;
     private HomePage homePage;
@@ -94,10 +94,4 @@ public class CheckoutTest {
         checkoutPage.clickOk();
     }
 
-    @AfterTest
-    public void quit() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
 }

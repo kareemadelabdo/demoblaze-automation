@@ -7,7 +7,7 @@ import org.testng.annotations.*;
 import Pages.*;
 import Utils.*;
 
-public class CartTests {
+public class CartTests extends AbstractTest{
 
     private WebDriver driver;
     private HomePage homePage;
@@ -50,10 +50,4 @@ public class CartTests {
         Assert.assertTrue(cartPage.getProductPrice().matches("\\d+"), "Invalid product price.");
     }
 
-    @AfterTest
-    public void quit() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
 }

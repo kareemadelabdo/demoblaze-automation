@@ -1,4 +1,5 @@
 package Tests;
+import Utils.AbstractTest;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -6,7 +7,7 @@ import Pages.LoginPage;
 import Utils.BrowserType;
 import Utils.JsonUtil;
 import Utils.WebDriverFactory;
-public class LoginTests {
+public class LoginTests extends AbstractTest {
     private WebDriver driver;
     private LoginPage loginPage;
 
@@ -28,10 +29,4 @@ public class LoginTests {
                 "Login failed or username not displayed correctly.");
     }
 
-    @AfterTest
-    public void quit() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
 }

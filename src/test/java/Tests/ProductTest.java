@@ -3,6 +3,7 @@ package Tests;
 import Pages.HomePage;
 import Pages.LoginPage;
 import Pages.ProductPage;
+import Utils.AbstractTest;
 import Utils.BrowserType;
 import Utils.WebDriverFactory;
 import Utils.JsonUtil;
@@ -10,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class ProductTest {
+public class ProductTest extends AbstractTest {
 
     private WebDriver driver;
     private HomePage homePage;
@@ -48,10 +49,4 @@ public class ProductTest {
         Assert.assertFalse(description.isEmpty(), "Description is missing.");
     }
 
-    @AfterTest
-    public void quit() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
 }
